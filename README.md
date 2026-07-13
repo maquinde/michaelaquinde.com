@@ -41,4 +41,4 @@ Wait ~1 minute, refresh the live site. Done.
 | `article-bodies.jsx`     | Full text of each Writing article, keyed by slug.               |
 | `page-*.jsx`             | Per-page layout (e.g. About bio text lives in `page-about.jsx`).|
 | `v3-brutalist.jsx`       | Shared visual components.                                        |
-| `images/`, `covers/`, `audio/` | Media files.                                              |
+| `images/`, `covers/`     | Media files. Podcast audio is hosted on GitHub Releases, not a folder. |
