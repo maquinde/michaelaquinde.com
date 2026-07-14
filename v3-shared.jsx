@@ -63,8 +63,8 @@
   // ║  Leave "" and the cover simply isn't clickable.                    ║
   // ╚══════════════════════════════════════════════════════════════════╝
   const BUY = {
-    ep0: "https://www.amazon.com/dp/1119642787?tag=YOUR-AFFILIATE-TAG-20", // ← replace with your affiliate link
-    ep1: "https://www.amazon.com/dp/1492096598?tag=YOUR-AFFILIATE-TAG-20", // ← replace with your affiliate link
+    ep0: "https://www.amazon.com/dp/1119642787?tag=magk0e-20",
+    ep1: "https://www.amazon.com/dp/1492096598?tag=magk0e-20",
   };
 
   const EPISODES = [
