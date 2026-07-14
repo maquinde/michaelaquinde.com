@@ -99,13 +99,14 @@
           <SectionHeader no="03" title="Tools" viewAll={viewAll("TOOLS")} />
           <div className="v3-tools">
             {TOOLS.map((t) => (
-              <div key={t.name} className="v3-tool">
+              <a key={t.name} className="v3-tool" href={t.href} target="_blank" rel="noopener noreferrer">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
                   <span className="v3-tool-name">{t.name}</span>
                   <MonoTxt color={C.dim}>{t.lang}</MonoTxt>
                 </div>
                 <div style={{ color: C.fgDim, fontSize: 14, marginTop: 10 }}>{t.desc}</div>
-              </div>
+                <div style={{ marginTop: 16 }}><span className="v3-tool-arrow">{t.href && t.href.includes("github.com") ? "VIEW ON GITHUB ↗" : "VIEW PROJECT ↗"}</span></div>
+              </a>
             ))}
           </div>
         </section>

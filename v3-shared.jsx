@@ -29,10 +29,10 @@
 
   // ---- Data -------------------------------------------------------------
   const POSTS = [
-    { date: "07.11.26", title: "flaws2.cloud Walkthrough, Level 1: Leaked Credentials and Open S3 Buckets", tags: ["aws","cloud-security","ctf","s3","iam","offensive-security"], read: "7 min", n: 4, slug: "flaws2-level1", cover: "images/flaws2-level1-cover.png" },
-    { date: "07.04.26", title: "Identity Management on AWS: Building a Secure Login System with Amazon Cognito", tags: ["aws","cloud-security","cognito","iam","oidc","mfa"], read: "10 min", n: 3, slug: "identity-management-cognito", cover: "images/identity-management-cognito-cover.png" },
-    { date: "07.04.26", title: "Building a Secure Serverless Website on AWS: S3, CloudFront, WAF, and IAM", tags: ["aws","cloud-security","s3","cloudfront","waf","iam"], read: "9 min", n: 2, slug: "secure-serverless-website", cover: "images/secure-serverless-website-cover.png" },
-    { date: "06.20.26", title: "Build a Virtual Private Cloud", tags: ["cloud","aws","networking"], read: "10 min", n: 1, slug: "build-a-vpc", cover: "images/build-a-vpc-cover.png" },
+    { date: "07.11.26", title: "flaws2.cloud Walkthrough, Level 1: Leaked Credentials and Open S3 Buckets", tags: ["aws","cloud-security","ctf","s3","iam","offensive-security"], read: "7 min", n: 4, slug: "flaws2-level1", cover: "images/flaws2-level1-cover.jpg" },
+    { date: "07.04.26", title: "Identity Management on AWS: Building a Secure Login System with Amazon Cognito", tags: ["aws","cloud-security","cognito","iam","oidc","mfa"], read: "10 min", n: 3, slug: "identity-management-cognito", cover: "images/identity-management-cognito-cover.jpg" },
+    { date: "07.04.26", title: "Building a Secure Serverless Website on AWS: S3, CloudFront, WAF, and IAM", tags: ["aws","cloud-security","s3","cloudfront","waf","iam"], read: "9 min", n: 2, slug: "secure-serverless-website", cover: "images/secure-serverless-website-cover.jpg" },
+    { date: "06.20.26", title: "Build a Virtual Private Cloud", tags: ["cloud","aws","networking"], read: "10 min", n: 1, slug: "build-a-vpc", cover: "images/build-a-vpc-cover.jpg" },
   ];
 
   // Article permalink — a single Article.html reads ?p=<slug> and renders the post.
