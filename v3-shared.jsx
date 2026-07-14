@@ -53,7 +53,7 @@
   const AUDIO = {
     ep0: "https://github.com/maquinde/michaelaquinde.com/releases/download/podcast-audio/Security_Engineering.m4a",
     ep1: "https://github.com/maquinde/michaelaquinde.com/releases/download/podcast-audio/Zero_Trust_Networks.m4a",
-    // ep33: "https://github.com/maquinde/michaelaquinde.com/releases/download/podcast-audio/ep33-my-episode.m4a",  // ← next episode: uncomment & set path
+    ep2: "https://github.com/maquinde/michaelaquinde.com/releases/download/podcast-audio/Threat_Modeling.m4a",
   };
 
   // ╔══════════════════════════════════════════════════════════════════╗
@@ -65,12 +65,11 @@
   const BUY = {
     ep0: "https://www.amazon.com/dp/1119642787?tag=magk0e-20",
     ep1: "https://www.amazon.com/dp/1492096598?tag=magk0e-20",
+    ep2: "https://www.amazon.com/dp/1492056553?tag=magk0e-20",
   };
 
   const EPISODES = [
-    // ── NEXT EPISODE: copy this line, fill in the blanks, uncomment ──────────
-    // { num: 33, title: "Title here", guest: "with Guest Name", date: "MM.DD.YY", duration: 0, src: AUDIO.ep33, cover: "covers/ep033-slug.jpeg", desc: "Show notes paragraph here." },
-    // ────────────────────────────────────────────────────────────────────────
+    { num: 2, title: "Threat Modeling: A Practical Guide for Development Teams", guest: "NotebookLM Speaker", date: "07.14.26", duration: 0, src: AUDIO.ep2, cover: "covers/ep002-threat-modeling.jpg", desc: "Izar Tarandach and Matthew J. Coles lay out a hands-on approach to threat modeling that development teams can fold directly into their existing workflow, rather than treating it as a one-off security exercise. The book walks through the major methodologies — from data flow diagrams and attack trees to STRIDE and newer automated approaches — while emphasizing that the real goal is finding and fixing design flaws before they become code. Grounded in real-world engineering practice, it argues that threat modeling works best as a continuous, collaborative habit shared across an entire team rather than a task owned solely by security specialists.", buy: BUY.ep2 },
     { num: 1, title: "Zero Trust Networks: Building Secure Systems in Untrusted Networks (2nd Edition)", guest: "NotebookLM Speaker", date: "06.06.26", duration: 0, src: AUDIO.ep1, cover: "covers/ep001-zero-trust-networks.jpg", desc: "Authors Razi Rais, Christina Morillo, Evan Gilman, and Doug Barth present the zero trust security model, a paradigm shift that discards traditional perimeter-based defenses in favor of an \"always assume breach\" and \"never trust but always verify\" approach. The book provides practical guidance on building secure systems through in-depth explanations of trust engines, context-aware agents, and real-world case studies to help organizations navigate fundamentally untrusted networks.", buy: BUY.ep1 },
     { num: 0, title: "Security Engineering: A Guide to Building Dependable Distributed Systems Third Edition", guest: "NotebookLM Speaker", date: "06.03.26", duration: 0, src: AUDIO.ep0, cover: "covers/ep000-security-engineering.jpeg", desc: "Ross Anderson’s Security Engineering (Third Edition) provides a comprehensive framework for designing systems that remain robust against malice, error, and mischance. The text emphasizes that modern security requires a cross-disciplinary approach, integrating technical tools like cryptography with human factors such as psychology and economics. By examining diverse environments—including banking, military operations, and healthcare—the author illustrates how protection strategies must evolve alongside technology. A central theme is the analysis framework, which balances policy, mechanism, assurance, and incentives to move beyond \"security theatre\" toward genuine resilience. The book specifically addresses the growing convergence of safety and security as software becomes embedded in critical physical infrastructure. Ultimately, these sources serve as a foundational guide for engineers to anticipate and mitigate adversarial thinking in an increasingly interconnected world.", buy: BUY.ep0 },
   ];
