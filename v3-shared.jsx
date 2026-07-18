@@ -87,6 +87,8 @@
     { name: "SCOUTSUITE", desc: "Multi-cloud security-auditing tool (AWS, Azure, GCP) that reports misconfigurations in one dashboard.", lang: "PYTHON", href: "https://github.com/nccgroup/ScoutSuite" },
     { name: "AZVIZ", desc: "PowerShell module that generates topology diagrams of Azure resources and their relationships.", lang: "POWERSHELL", href: "https://github.com/PrateekKumarSingh/AzViz" },
     { name: "CLOUDMAPPER", desc: "Analyzes AWS environments — visualizes network topology and audits for misconfigurations.", lang: "PYTHON", href: "https://github.com/duo-labs/cloudmapper" },
+    { name: "CLOUDTRACKER", desc: "Compares CloudTrail logs against IAM policies to find over-privileged users and unused permissions.", lang: "PYTHON", href: "https://github.com/duo-labs/cloudtracker" },
+    { name: "REPOKID", desc: "Netflix's tool that automatically removes unused AWS IAM permissions to enforce least privilege.", lang: "PYTHON", href: "https://github.com/Netflix/repokid" },
     { name: "PACU", desc: "AWS exploitation framework for testing the security of Amazon Web Services environments.", lang: "PYTHON", href: "https://github.com/RhinoSecurityLabs/pacu" },
     { name: "CLOUDPENTESTCHEATSHEETS", desc: "Cheatsheets for penetration testing across AWS, Azure, and GCP environments.", lang: "REF", href: "https://github.com/dafthack/CloudPentestCheatsheets/" },
     { name: "RESPONDER-WINDOWS", desc: "Windows build of Responder — an LLMNR/NBT-NS/mDNS poisoner for capturing network credentials.", lang: "PYTHON", href: "https://github.com/lgandx/Responder-Windows" },
