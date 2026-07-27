@@ -18,6 +18,7 @@
     });
 
     const posts = POSTS.slice(0, 6);
+    const tools = TOOLS.slice(0, 6);
 
     return (
       <div className="v3-root">
@@ -98,7 +99,7 @@
         <section id="sec-TOOLS" className="v3-section">
           <SectionHeader no="03" title="Tools" viewAll={viewAll("TOOLS")} />
           <div className="v3-tools">
-            {TOOLS.map((t) => (
+            {tools.map((t) => (
               <a key={t.name} className="v3-tool" href={t.href} target="_blank" rel="noopener noreferrer">
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
                   <span className="v3-tool-name">{t.name}</span>

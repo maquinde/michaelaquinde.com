@@ -224,18 +224,36 @@ GitHub-style grid, and the whole card links out to the repo.
 Find `const TOOLS = [` and add a line:
 
 ```js
-{ name: "RULEDIFF", desc: "Diffs Sigma rules and flags drift between snapshots.", lang: "GO", href: "https://github.com/maquinde/rulediff" },
+{ name: "RULEDIFF", desc: "Diffs Sigma rules and flags drift between snapshots.", lang: "GO", href: "https://github.com/maquinde/rulediff", category: "Detection Engineering & Threat Hunting" },
 ```
 
-| Field  | What it does                              | Notes                                        |
-| ------ | ----------------------------------------- | -------------------------------------------- |
-| `name` | Tool name (card title)                    | uppercase reads best                         |
-| `desc` | One-line description                      |                                              |
-| `lang` | Small language/type tag (top-right)       | e.g. `"GO"`, `"PYTHON"`, `"DATA"`            |
-| `href` | Where the card links                      | full URL; opens in a new tab. Each card shows a "VIEW ON GITHUB ↗" link. |
+| Field      | What it does                              | Notes                                        |
+| ---------- | ----------------------------------------- | -------------------------------------------- |
+| `name`     | Tool name (card title)                    | uppercase reads best                         |
+| `desc`     | One-line description                      |                                              |
+| `lang`     | Small language/type tag (top-right)       | e.g. `"GO"`, `"PYTHON"`, `"DATA"`            |
+| `href`     | Where the card links                      | full URL; opens in a new tab. Each card shows a "VIEW ON GITHUB ↗" link. |
+| `category` | Which section the card is grouped under on the Tools page | must exactly match one of the strings in `TOOL_CATEGORIES` (just below `TOOLS`) — see the list below |
+
+**Valid categories** (in the order they're displayed):
+
+1. Cloud Security
+2. Identity & Access
+3. Password & Credential Auditing
+4. Detection Engineering & Threat Hunting
+5. Web & Application Security
+6. Exploitation & Evasion
+7. Network Recon & Enumeration
+8. Secrets & Repo Hygiene
+9. DFIR & Forensics
+10. DevOps & Utilities
+
+Want a new category instead of reusing one of these? Add its name to the
+`TOOL_CATEGORIES` list in `v3-shared.jsx` (order in that list = display order
+on the page), then reference it from your tool's `category` field.
 
 **To remove a tool**, delete its `{ … }` line. The "N Utilities" count in the header
-updates itself.
+updates itself, as does the "N tools" count on its category section.
 
 ---
 
