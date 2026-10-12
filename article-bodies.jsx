@@ -10,7 +10,7 @@
         { t: "p", c: "In this project I deployed an intentionally vulnerable web app behind an ALB, confirmed it accepted every bad request I sent, then put AWS WAF in front of it and ran the same tests again. Same attacks, different result. The whole environment comes from a CloudFormation template, so you can build it, break it, fix it, and delete it without leaving anything running on your bill." },
         { t: "quote", c: "Heads up: this app is vulnerable on purpose. Only deploy it in an AWS account you control, only test against your own resources, and tear it down when you finish." },
         { t: "h", c: "Architecture at a Glance" },
-        { t: "img", src: "images/aws-waf-alb-01-architecture-diagram.png", alt: "Architecture diagram showing internet traffic reaching an EC2 instance through an Application Load Balancer", wide: true },
+        { t: "img", src: "images/aws-waf-alb-01-architecture-diagram.png", alt: "Architecture diagram showing client traffic passing through AWS WAF and an Application Load Balancer, then an Internet Gateway, to an EC2 instance in a public subnet of a VPC", wide: true },
         { t: "p", c: "The flow: Internet → Application Load Balancer (HTTP on port 80) → target group → EC2 instance. After the fix, a web ACL sits on the ALB and inspects every request before it reaches the app." },
         { t: "p", c: "Services used:" },
         { t: "ul", c: ["AWS CloudFormation builds and deletes the environment.", "Application Load Balancer and EC2 host the sample app.", "AWS WAF filters requests with three AWS managed rule groups and one custom rule.", "AWS CloudShell sends the test traffic.", "CloudWatch metrics (through the WAF traffic overview) show what was allowed and blocked."] },
