@@ -1,7 +1,7 @@
 // ABOUT page — bio, portrait slot, and meta table.
 (function () {
   const V = window.V3;
-  const { C, MonoTxt, Header, Footer, PageHero, useTeleport, ABOUT_META, ensureStyles } = V;
+  const { C, MonoTxt, Header, Footer, PageHero, useTeleport, ABOUT_META, ContactButton, ensureStyles } = V;
 
   function PageAbout() {
     React.useEffect(ensureStyles, []);
@@ -16,11 +16,14 @@
           blurb="Security engineer, 4+ years defensive. Endpoint monitoring → identity & access → the architecture that connects cloud, identity, and endpoint into one posture."
         />
         <div className="v3-about">
-          <div className="v3-about-portrait">
-            <svg className="v3-about-portrait-silhouette" viewBox="0 0 200 240" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-              <circle cx="100" cy="72" r="46" />
-              <path d="M100 128c-54 0-92 34-92 84v28h184v-28c0-50-38-84-92-84z" />
-            </svg>
+          <div className="v3-about-side">
+            <div className="v3-about-portrait">
+              <svg className="v3-about-portrait-silhouette" viewBox="0 0 200 240" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+                <circle cx="100" cy="72" r="46" />
+                <path d="M100 128c-54 0-92 34-92 84v28h184v-28c0-50-38-84-92-84z" />
+              </svg>
+            </div>
+            <ContactButton />
           </div>
           <div className="v3-about-body">
             I'm Michael, a Security Engineer who builds and defends enterprise security architectures across cloud,

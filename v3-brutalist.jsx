@@ -3,7 +3,7 @@
 (function () {
   const V = window.V3;
   const { C, MonoTxt, GridBand, SectionHeader, PodcastPlayer, Header, Footer, useTeleport,
-          POSTS, EPISODES, TOOLS, ABOUT_META, NAV, ensureStyles, articleHref } = V;
+          POSTS, EPISODES, TOOLS, ABOUT_META, ContactButton, NAV, ensureStyles, articleHref } = V;
 
   const hrefFor = (id) => NAV.find((n) => n.id === id).href;
 
@@ -116,11 +116,14 @@
         <section id="sec-ABOUT" className="v3-section">
           <SectionHeader no="04" title="About" viewAll={viewAll("ABOUT")} />
           <div className="v3-about">
-            <div className="v3-about-portrait">
-              <svg className="v3-about-portrait-silhouette" viewBox="0 0 200 240" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
-                <circle cx="100" cy="72" r="46" />
-                <path d="M100 128c-54 0-92 34-92 84v28h184v-28c0-50-38-84-92-84z" />
-              </svg>
+            <div className="v3-about-side">
+              <div className="v3-about-portrait">
+                <svg className="v3-about-portrait-silhouette" viewBox="0 0 200 240" preserveAspectRatio="xMidYMax meet" aria-hidden="true">
+                  <circle cx="100" cy="72" r="46" />
+                  <path d="M100 128c-54 0-92 34-92 84v28h184v-28c0-50-38-84-92-84z" />
+                </svg>
+              </div>
+              <ContactButton />
             </div>
             <div className="v3-about-body">
               I'm Michael, a Security Engineer who builds and defends enterprise security architectures across cloud,

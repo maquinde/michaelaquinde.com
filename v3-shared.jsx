@@ -29,6 +29,7 @@
 
   // ---- Data -------------------------------------------------------------
   const POSTS = [
+    { date: "10.06.26", title: "Blocking Common Web Attacks with AWS WAF on an Application Load Balancer", tags: ["aws","cloud-security","waf","alb","cloudformation","owasp"], read: "12 min", n: 5, slug: "aws-waf-alb", cover: "images/aws-waf-alb-00-title.png" },
     { date: "07.11.26", title: "flaws2.cloud Walkthrough, Level 1: Leaked Credentials and Open S3 Buckets", tags: ["aws","cloud-security","ctf","s3","iam","offensive-security"], read: "7 min", n: 4, slug: "flaws2-level1", cover: "images/flaws2-level1-cover.jpg" },
     { date: "07.04.26", title: "Identity Management on AWS: Building a Secure Login System with Amazon Cognito", tags: ["aws","cloud-security","cognito","iam","oidc","mfa"], read: "10 min", n: 3, slug: "identity-management-cognito", cover: "images/identity-management-cognito-cover.jpg" },
     { date: "07.04.26", title: "Building a Secure Serverless Website on AWS: S3, CloudFront, WAF, and IAM", tags: ["aws","cloud-security","s3","cloudfront","waf","iam"], read: "9 min", n: 2, slug: "secure-serverless-website", cover: "images/secure-serverless-website-cover.jpg" },
@@ -235,6 +236,8 @@ a.v3-bare{color:inherit;text-decoration:none;}
 .v3-about-portrait-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
 .v3-about-portrait-label{position:absolute;inset:0;display:flex;align-items:flex-end;padding:12px;}
 .v3-about-portrait-silhouette{position:absolute;inset:0;width:100%;height:100%;fill:${C.line};}
+.v3-about-side{display:flex;flex-direction:column;gap:14px;align-items:flex-start;}
+.v3-about-side .v3-about-portrait{width:100%;}
 .v3-about-body{font-size:clamp(15px,1.4vw,18px);line-height:1.55;color:var(--v3-fg);}
 .v3-about-meta{border-left:1px solid var(--v3-line);padding-left:24px;display:grid;row-gap:10px;align-content:start;}
 .v3-meta-row{display:grid;grid-template-columns:90px 1fr;gap:12px;border-bottom:1px dashed var(--v3-line);padding-bottom:10px;}
@@ -419,7 +422,30 @@ a.v3-tool:hover .v3-tool-arrow{opacity:1;color:${C.green};}
 
 /* Footer */
 .v3-footer{padding:28px var(--v3-pad);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;}
+.v3-footer-socials{display:flex;gap:18px;flex-wrap:wrap;}
+.v3-social-link{text-decoration:none;}
+.v3-social-link:hover .v3-mono{color:var(--v3-green) !important;}
 @media (max-width: 600px){ .v3-footer{grid-template-columns:1fr;} }
+.v3-social-btn{background:none;border:none;padding:0;cursor:pointer;font:inherit;}
+
+/* Contact modal */
+.v3-modal-overlay{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.82);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);display:flex;align-items:flex-start;justify-content:center;padding:8vh 20px 24px;overflow-y:auto;}
+.v3-modal{width:100%;max-width:520px;background:#0f0f0f;border:1px solid var(--v3-line);box-shadow:0 24px 60px rgba(0,0,0,0.6);}
+.v3-modal-head{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--v3-line);}
+.v3-modal-close{background:none;border:none;color:var(--v3-dim);font-family:${MONO};font-size:14px;cursor:pointer;padding:4px 6px;line-height:1;}
+.v3-modal-close:hover{color:var(--v3-fg);}
+.v3-modal-body{padding:22px 20px 24px;}
+.v3-field{display:block;margin-bottom:16px;}
+.v3-field-label{display:block;font-family:${MONO};font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--v3-dim);margin-bottom:7px;}
+.v3-input{width:100%;background:var(--v3-bg);border:1px solid var(--v3-line);color:var(--v3-fg);font-family:${SANS};font-size:14px;padding:11px 12px;outline:none;transition:border-color .12s ease;}
+.v3-input::placeholder{color:#444;}
+.v3-input:focus{border-color:var(--v3-green);}
+.v3-textarea{resize:vertical;min-height:110px;line-height:1.5;}
+
+.v3-captcha{margin:6px 0 14px;min-height:78px;}
+.v3-submit{width:100%;background:var(--v3-green);color:var(--v3-bg);border:none;font-family:${MONO};font-weight:700;font-size:13px;letter-spacing:1px;text-transform:uppercase;padding:13px;cursor:pointer;transition:opacity .12s ease;}
+.v3-submit:hover{opacity:.88;}
+.v3-submit:disabled{opacity:.5;cursor:not-allowed;}
 
 /* Teleport overlay — three modes: scroll (in+out), out (close+hold), in (open) */
 .v3-tp{position:fixed;inset:0;z-index:999;pointer-events:none;}
@@ -702,6 +728,99 @@ a.v3-tool:hover .v3-tool-arrow{opacity:1;color:${C.green};}
     );
   }
 
+  // ---- Contact (Web3Forms + honeypot + hCaptcha) ------------------------
+  const WEB3FORMS_KEY = "55d962eb-3d72-4828-a3b3-d5a2246c111d";
+
+  function ContactModal({ open, onClose }) {
+    const [status, setStatus] = useState("idle"); // idle | sending | ok | error
+    const [errMsg, setErrMsg] = useState("");
+
+    // Escape to close + lock body scroll while open
+    useEffect(() => {
+      if (!open) return;
+      const onKey = (e) => { if (e.key === "Escape") onClose(); };
+      document.addEventListener("keydown", onKey);
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+    }, [open, onClose]);
+
+    // Reset state and (re)load the Web3Forms client script so it renders the
+    // .h-captcha widget, which only exists in the DOM while the modal is open.
+    useEffect(() => {
+      if (!open) return;
+      setStatus("idle");
+      setErrMsg("");
+      const old = document.getElementById("v3-web3forms-client");
+      if (old) old.remove();
+      const s = document.createElement("script");
+      s.id = "v3-web3forms-client";
+      s.src = "https://web3forms.com/client/script.js";
+      s.async = true;
+      s.defer = true;
+      document.body.appendChild(s);
+    }, [open]);
+
+    if (!open) return null;
+
+    // Native form POST to Web3Forms. We only intercept to block bots.
+    const submit = (e) => {
+      const fd = new FormData(e.currentTarget);
+      if (fd.get("botcheck")) { e.preventDefault(); onClose(); return; } // honeypot tripped → silently drop
+      setStatus("sending");
+    };
+
+    return (
+      <div className="v3-modal-overlay" onMouseDown={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+        <div className="v3-modal" role="dialog" aria-modal="true" aria-label="Contact">
+          <div className="v3-modal-head">
+            <span className="v3-mono" style={{ color: C.green, fontSize: 12 }}>CONTACT / SEND MESSAGE</span>
+            <button className="v3-modal-close" onClick={onClose} aria-label="Close">✕</button>
+          </div>
+          <form className="v3-modal-body" action="https://api.web3forms.com/submit" method="POST" onSubmit={submit}>
+              <p style={{ color: C.fgDim, fontFamily: SANS, fontSize: 13, lineHeight: 1.6, margin: "0 0 18px" }}>Drop a note below — it routes straight to my inbox. No address required.</p>
+              <input type="hidden" name="access_key" value={WEB3FORMS_KEY} />
+              <input type="hidden" name="subject" value="New message from michaelaquinde.com" />
+              <input type="hidden" name="from_name" value="michaelaquinde.com contact form" />
+              {/* honeypot — humans never see or fill this */}
+              <input type="checkbox" name="botcheck" tabIndex={-1} autoComplete="off" style={{ display: "none" }} aria-hidden="true" />
+              <label className="v3-field">
+                <span className="v3-field-label">Name</span>
+                <input name="name" type="text" required autoComplete="name" className="v3-input" />
+              </label>
+              <label className="v3-field">
+                <span className="v3-field-label">Email</span>
+                <input name="email" type="email" required autoComplete="email" placeholder="you@example.com" className="v3-input" />
+              </label>
+              <label className="v3-field">
+                <span className="v3-field-label">Message</span>
+                <textarea name="message" required rows={5} className="v3-input v3-textarea" />
+              </label>
+              <div className="h-captcha v3-captcha" data-captcha="true" />
+              {status === "error" ? (
+                <p className="v3-mono" style={{ color: "#ff5555", fontSize: 11, margin: "0 0 12px" }}>{errMsg}</p>
+              ) : null}
+              <button type="submit" className="v3-submit" disabled={status === "sending"}>
+                {status === "sending" ? "SENDING…" : "SEND MESSAGE →"}
+              </button>
+          </form>
+        </div>
+      </div>
+    );
+  }
+
+  function ContactButton() {
+    const [contactOpen, setContactOpen] = useState(false);
+    return (
+      <>
+        <button type="button" className="v3-social-link v3-social-btn" onClick={() => setContactOpen(true)}>
+          <MonoTxt color={C.fgDim}>EMAIL ME →</MonoTxt>
+        </button>
+        <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
+      </>
+    );
+  }
+
   function Footer() {
     return (
       <div className="v3-footer">
@@ -729,6 +848,6 @@ a.v3-tool:hover .v3-tool-arrow{opacity:1;color:${C.green};}
     C, DISPLAY, SANS, MONO, NAV,
     POSTS, EPISODES, TOOLS, TOOL_CATEGORIES, ABOUT_META, articleHref,
     ensureStyles, MonoTxt, GridBand, SectionHeader, PodcastPlayer,
-    useTeleport, Header, Footer, PageHero,
+    useTeleport, Header, Footer, PageHero, ContactModal, ContactButton,
   };
 })();
