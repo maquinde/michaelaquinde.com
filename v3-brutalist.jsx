@@ -129,7 +129,7 @@
               I'm Michael, a Security Engineer who builds and defends enterprise security architectures across cloud,
               identity, and endpoint domains.
               <br/><br/>
-              For the past 4+ years, I've worked across the full security stack: AWS cloud security, identity and access
+              I've worked across the full security stack: AWS cloud security, identity and access
               management, endpoint detection and response, and data protection. My specialty is designing systems that
               reduce risk without slowing the business down.
               <br/><br/>
